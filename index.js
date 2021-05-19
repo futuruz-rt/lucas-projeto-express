@@ -11,10 +11,12 @@ port = process.env.PORT || 3000,
 app = express();
 
 Users = require ('./model/Users')
+Cidades = require ('./model/Cidades')
 
 login = 0;
 cadastro = 0;
 isAdmin = 0;
+itemCidade = 0;
 
 cache = cache({
 	prefix:'redis-cache',
@@ -82,9 +84,9 @@ app.post('/',async (req,res) =>{
 			res.cookie('login', usuario);
 			req.session.login = usuario;
 			if (admin === 1){
-				res.redirect('/admin');
+				res.redirect('/cidade');
 			}else{
-				res.redirect('/normal');
+				res.redirect('/busca');
 			}
 			return;
 		}else{
@@ -108,6 +110,31 @@ app.post('/cadastro',  async (req,res) =>{
 		}
 	}
 	res.redirect('/');
+})
+
+app.get('/cidade',  (req, res) =>{
+	if(req.cookies && isAdmin===1 && req.session && req.session.login){
+		res.render('cidade',{itemCidade:itemCidade});
+		itemCidade = 0;
+	}else{
+		res.redirect('/');
+	}
+})
+
+app.post('/cidade', upload.single('file'), async (req,res) =>{
+	const nomeCidade = req.body.nomeCidade,
+	estado = req.body.estado,
+	descricao = req.body.descricao;
+	if(req.file !== undefined){
+		img = req.file.buffer.toString("base64");
+	}else{
+		img = "";
+	}
+	
+	if(nomeCidade !== "" && estado !== "" && descricao !=="" && img != ""){		 
+		 itemCidade = await Cidades.cadastrar(nomeCidade,estado,descricao,img);
+	}
+	res.redirect('/cidade');
 })
 
 app.listen(port);
