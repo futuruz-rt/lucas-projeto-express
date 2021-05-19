@@ -11,11 +11,6 @@ body{
 	font-family: 'Inter', sans-serif;
 }
 
-.button-resize:hover{
-	background-color: rgb(129,128,128);	
-    color: #fff
-}
-
 .icon-login{
 	display: inline-block;
 	width: 100%;
@@ -55,6 +50,12 @@ body{
 	color: white;
 }
 
+.button-resize{
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;
+}
+
 .link-cadastro{
 	text-align:center;
 	display:block;
@@ -66,3 +67,4 @@ body{
 .link-cadastro:hover{
 	color: rgb(110, 110, 110);
 }
+
