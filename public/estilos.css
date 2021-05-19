@@ -1,0 +1,68 @@
+.hide{
+	display:none;
+}
+
+.title{
+	text-align: center;
+
+}
+
+body{
+	font-family: 'Inter', sans-serif;
+}
+
+.button-resize:hover{
+	background-color: rgb(129,128,128);	
+    color: #fff
+}
+
+.icon-login{
+	display: inline-block;
+	width: 100%;
+	text-align:center;
+
+}
+
+.input-login{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 7px;
+	width: 30%;
+	height: 40px;
+	font-size: 1.5rem;
+	border:1px black solid;
+	background-color: #e2e2e2;
+}
+
+.title-login{
+	margin-bottom: 50px;
+}
+
+.btn-login{
+	background-color: #fff;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 10%;
+	height: 50px;
+	font-size: 1.5rem;
+	margin-top: 50px;
+}
+
+.btn-login:hover{
+	background-color: rgb(118,118,118);
+	color: white;
+}
+
+.link-cadastro{
+	text-align:center;
+	display:block;
+	text-decoration: none;
+	margin-top: 15px;
+	font-size: 1.8rem;	
+}
+
+.link-cadastro:hover{
+	color: rgb(110, 110, 110);
+}

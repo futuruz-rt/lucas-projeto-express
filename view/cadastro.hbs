@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cadastro</title>
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+</head>
+<body>
+	<h1 class="title">É fácil começar</h1>
+	<p class="title">Cadastro rápido e sem burocracia.</p>
+	<p class="title">Preencha o formulário abaixo para começar!</p>
+	<form method="post">
+		<input placeholder="E-mail"  id="email" class="input-login " type="email" name="email">
+		<input placeholder="Usuário" id="usuario" class="input-login " type="text" name="usuario">
+		<input  placeholder="Senha" id="senha" class="input-login "  type="senha" name="senha">			
+		<button id="btn-cadastrar"  class="button-resize btn-login " type="submit">Cadastrar</button>
+	</form>
+
+	<script type="text/javascript">
+		document.querySelector("#btn-cadastrar").addEventListener("click",validaCadastro);		
+		function validaCadastro(){
+			let email =  document.querySelector("#email").value
+			let usuario =  document.querySelector("#usuario").value
+			let senha = document.querySelector("#senha").value
+			if (usuario == "" || senha == ""|| email == ""){
+				alert('Por favor, preencha todos os campos');
+				return false;
+			}
+		}
+
+	</script>
+</body>
+</html>

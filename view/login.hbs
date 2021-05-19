@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+</head>
+
+<body>
+	<center><i class="fas fa-6x fa-lock"></i></center>
+	<h1 class="icon-login title-login">Bem-vindo! Informe as credenciais para continuar...</h1>
+	<form method="post">
+		<input placeholder="Usuário" id="usuario"  class="input-login" type="text" name="usuario">
+		<input  placeholder="Senha" id="senha" class="input-login"  type="password" name="senha">
+		<button id="botao-login"  class="btn-login botao-busca" type="submit">Autenticar</button>
+		<a href="/cadastro" class="link-cadastro" name="Cadastro">Não é cliente ainda? Faça o seu cadastro!</a>
+	</form>
+	
+	<script type="text/javascript">
+		document.querySelector("#botao-login").addEventListener("click",validaLogin);		
+		function validaLogin(){
+			let usuario =  document.querySelector("#usuario").value
+			let senha = document.querySelector("#senha").value
+			
+			if (usuario == "" || senha == ""){
+				alert('Erro! Preencha os campos para prosseguir');
+				return false;
+			}
+		}
+			
+		if({{login}} === 1){
+			alert('Erro! Preencha os campos novamente')
+		}
+
+		if({{cadastro}}===1 || {{cadastro}}===2){
+			alert('Erro! Preencha os campos novamente');	
+		} else if({{cadastro}}===3){
+			alert('Sucesso! Usuário cadastrado com sucesso');
+		}
+
+	</script>
+
+</body>
+</html>
