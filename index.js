@@ -3,7 +3,7 @@ path = require('path'),
 cookieParser = require('cookie-parser'),
 session = require('express-session'),
 cache = require('express-redis-cache'),
-express =require('express'),
+express = require('express'),
 multer = require('multer'),
 storage = multer.memoryStorage();
 upload = multer({ storage: storage }),
@@ -52,19 +52,24 @@ app.use(session({
 app.get('/', cache.invalidate(),async (req, res) =>{
 	isAdmin = 0;
 	if(req.cookies && req.cookies.login && req.session && req.session.login){
-		res.redirect('/autenticado');
+		res.redirect('/busca');
 	}else{
-
 		res.render('login',{login:login,cadastro:cadastro});
 		cadastro = 0;
 		login = 0;
 	}
 })
 
+app.post('/busca', cache.invalidate(), async (req,res) =>{
+	req.session.destroy();
+	res.clearCookie('login');
+	res.clearCookie('connect.sid');
+	res.redirect('/');
+})
 
 app.get('/cadastro', (req, res) =>{
 	if(req.cookies && req.cookies.login && req.session && req.session.login){
-		res.redirect('/autenticado');
+		res.redirect('/busca');
 	}else{
 		res.render('cadastro');
 
@@ -103,7 +108,7 @@ app.post('/cadastro',  async (req,res) =>{
 	const email = req.body.email,
 	usuario = req.body.usuario,
 	senha = req.body.senha;
-	if(email!== "" && usuario !=="" &&senha !== ""){
+	if(email!== "" && usuario !=="" && senha !== ""){
 		cadastro =  await Users.cadastrar(email,usuario,senha);
 		if(cadastro === 0){
 			cadastro = 3;
@@ -125,16 +130,32 @@ app.post('/cidade', upload.single('file'), async (req,res) =>{
 	const nomeCidade = req.body.nomeCidade,
 	estado = req.body.estado,
 	descricao = req.body.descricao;
+
 	if(req.file !== undefined){
-		img = req.file.buffer.toString("base64");
+		imagem = req.file.buffer.toString("base64");
 	}else{
-		img = "";
+		imagem = "";
 	}
 	
-	if(nomeCidade !== "" && estado !== "" && descricao !=="" && img != ""){		 
-		 itemCidade = await Cidades.cadastrar(nomeCidade,estado,descricao,img);
+	if(nomeCidade !== "" && estado !== "" && descricao !=="" && imagem != ""){		 
+		 itemCidade = await Cidades.cadastrar(nomeCidade,estado,descricao,imagem);
 	}
 	res.redirect('/cidade');
 })
+
+app.get('/busca',   async (req, res) =>{
+	var cidades = null;
+	if(req.cookies && req.cookies.login && req.session && req.session.login){
+		cache.route()
+		if(req.query.busca !== "" &&req.query.busca !== null){
+			const busca = req.query.busca;
+			cidades = await Cidades.buscar(busca);
+		}
+		res.render('busca',{usuario: req.session.login,cidades:cidades});
+	}else{
+		res.redirect('/');
+	}
+})
+
 
 app.listen(port);
