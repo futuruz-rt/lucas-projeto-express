@@ -22,13 +22,16 @@
 	</form>
 	{{#cidades}}
 	<div class="cidade">
-		<img src="data:image/png;base64, {{imagem}}">			
+		<img src="data:image/png;base64, {{imagem}}">	
+		<div id="nomeCidade">
+			{{nomeCidade}}
+		</div>		
 		<div id="estado">
-			{{nomeCidade - estado}}
+			{{estado}}
 		</div>	
 		<div id="descricao">
 			{{descricao}}
-		</div>
+	</div>
 	{{/cidades}}
 	</div>	
 	<script type="text/javascript">		
