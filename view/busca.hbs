@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Busca de Cidades</title>
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<h2>Bem vindo, {{usuario}}</h2>
+	<form method="post">
+		<button class="btn-pattern button-resize btn-logout" type="submit">SAIR</button>
+	</form>	
+	<h1 class="title">Informe a cidade para buscar</h1>
+	<form method="get">
+		<input id="input-busca" class="input" type="text" name="busca">
+		<div class="wrapper">
+			<button id="botao-busca" class="btn-pattern button-resize" type="submit">Buscar</button>
+		</div>
+	</form>
+	{{#cidades}}
+	<div class="cidade">
+		<img src="data:image/png;base64, {{imagem}}">			
+		<div id="estado">
+			{{nomeCidade - estado}}
+		</div>	
+		<div id="descricao">
+			{{descricao}}
+		</div>
+	{{/cidades}}
+	</div>	
+	<script type="text/javascript">		
+		document.querySelector("#botao-busca").addEventListener("click",buscar);		
+		function buscar(){
+			var correto = 0;			
+			var input = document.querySelector("#input-busca").value;
+			if (input == ""){
+				 alert('Erro! Preencha os campos para prosseguir');
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>
